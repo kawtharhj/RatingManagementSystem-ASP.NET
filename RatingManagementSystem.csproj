@@ -28,4 +28,8 @@
     <Folder Include="Pages\Employee\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include=".github\.gitignore" />
+  </ItemGroup>
+
 </Project>

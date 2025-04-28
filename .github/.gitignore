@@ -1,0 +1,19 @@
+﻿# Ignore Visual Studio temporary files, build results, and user-specific files
+.vs/
+*.user
+*.suo
+
+# Ignore build results
+bin/
+obj/
+
+# Ignore other common temporary files
+*.log
+*.tmp
+*.cache
+
+# Ignore environment configs
+*.env
+
+# Ignore NuGet Packages folder
+packages/
