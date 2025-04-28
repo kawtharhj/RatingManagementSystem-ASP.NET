@@ -1,0 +1,150 @@
+﻿@page
+@model RatingManagementSystem.Pages.Employee.CheckApplicationModel
+@{
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="/css/csstable/style.css">
+
+</head>
+
+
+
+<h1>All Applications</h1>
+
+<form method="get">
+    <input type="radio" value="Newest" name="SortOrder" />
+    <label>Lastest</label>
+
+    <input type="radio" value="Oldest" name="SortOrder" />
+    <label>Oldest</label>
+
+    <select name="filterValue">
+        <option value="">All Application</option>
+        <option value="Biology">Biology</option>
+        <option value="Biochemistry">Biochemistry</option>
+        <option value="Chemistry">Chemistry</option>
+        <option value="Electronic">Electronic</option>
+        <option value="Informatics">Informatics</option>
+        <option value="Math">Math</option>
+        <option value="Physics">Physics</option>
+        <option value="Statistics">Statistics</option>
+        <option value="Other">Other</option>
+    </select>
+    <input type="submit" value="Filter" class="btn btn-warning" />
+</form>
+
+<hr />
+
+
+@if (Model.AllApps == null || !Model.AllApps.Any())
+{
+    <p>No Applications Yet</p>
+}
+
+else
+{
+    <body>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-wrap">
+                    <table class="table table-responsive-xl">
+                        <thead>
+                            <tr>
+                                <th style="color:bisque;font-weight:bold;font-size:large">
+                                    Doctor
+                                </th>
+
+                                <th style="color:bisque;font-weight:bold;font-size:large">
+                                    Major:
+                                </th>
+
+                                <th style="color:bisque;font-weight:bold;font-size:medium">
+                                    Thesis Title
+                                </th>
+
+                                <th style="color:bisque;font-weight:bold;font-size:large">
+                                    Defense Location:
+                                </th>
+                                <th style="color:bisque;font-weight:bold;font-size:large">
+                                    Status
+                                </th>
+
+                                <th>
+                                </th>
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+                            @foreach (var user in Model.AllApps)
+                            {
+                                <tr class="alert" role="alert">
+                                    <td class="d-flex align-items-center">
+                                        <div class="img" style="background-image: url(images/person_1.jpg);"></div>
+                                        <div class="pl-3 email">
+                                            <span>@user.FirstName @user.LastName</span>
+                                            <span> @user.CreatedAt</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @user.DrMajor
+                                    </td>
+                                    <td>
+                                        @user.ThesisTitle
+                                    </td>
+                                    <td>
+                                        @user.DefenseUniversity - @user.DefenseLocation
+                                    </td>
+                                    @if (user.ApplicationStatus == "Successfully Sent")
+                                    {
+                                        <td><span> <h6 style="color:dimgrey;font-weight:bold;"> @user.ApplicationStatus </h6></span></td>
+                                    }
+                                    else
+
+                                    @if (user.ApplicationStatus == "In-Progress")
+                                    {
+                                        <td class="status"><span class="waiting">@user.ApplicationStatus</span></td>
+                                    }
+                                    else
+                                    @if (user.ApplicationStatus == "Results Are Available")
+                                    {
+                                        <td class="status"><span class="active">@user.ApplicationStatus</span></td>
+                                    }
+                                    <td>
+                                        <a asp-page="DetailsView" asp-route-id="@user.ApplicationID" class="brick-link">Details</a> |
+                                        <a asp-page="Delete" asp-route-id="@user.ApplicationID" class="brick-link">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </body>
+    <p>
+        <a asp-page="/Index" class="brick-link">Back To Home Page</a>
+    </p>
+
+
+
+}
+
+</html>
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+

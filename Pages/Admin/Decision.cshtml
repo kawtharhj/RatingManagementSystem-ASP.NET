@@ -1,0 +1,40 @@
+﻿@page
+@model RatingManagementSystem.Pages.Admin.DecisionModel
+@{
+}
+
+
+<div class="container">
+    <h1 class="mt-5 mb-4">The Committee's Decision</h1>
+
+    <form method="post">
+        <input type="hidden" asp-for="@Model.appdata.ApplicationID" name="id"/>
+
+        <div class="form-group">
+            <label for="appdata.Accepted" class="mb-3 d-block">Acceptance Decision</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" value="Yes" id="appdata.Accepted_Yes" name="appdata.Accepted" checked>
+                <label class="form-check-label" for="appdata.Accepted_Yes">Yes</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" value="No" id="appdata.Accepted_No" name="appdata.Accepted">
+                <label class="form-check-label" for="appdata.Accepted_No">No</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="appdata.FinalResultNotes">Decision and General Notes</label>
+            <textarea class="form-control" rows="5" id="appdata.FinalResultNotes" asp-for="appdata.FinalResultNotes"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="appdata.DoctorsDecision">Doctors Participate in Decision</label>
+            <input type="text" class="form-control" id="appdata.DoctorsDecision" asp-for="appdata.DoctorsDecision" placeholder="Enter names separated by commas" />
+        </div>
+
+        <button type="submit" class="btn btn-dark mt-4">Send</button>
+    </form>
+</div>
+
+
+

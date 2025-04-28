@@ -1,0 +1,83 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<link />
+<h3>@ViewData["Title"]</h3>
+<partial name="_StatusMessage" for="StatusMessage" />
+
+<link href="~/css/csstable/style.css" rel="stylesheet"/>
+
+
+<form id="profile-form" method="post" enctype="multipart/form-data">
+<div class="row">
+    <div class="col-md-6">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label asp-for="Username" class="form-label"></label>
+                    <input asp-for="Username" class="form-control" placeholder="Please choose your username." disabled />
+                </div>
+                
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.FirstName" class="form-control" />
+                <span asp-validation-for="Input.FirstName" style="color:goldenrod"></span>
+                <label asp-for="Input.FirstName" class="form-label"></label>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.LastName" class="form-control" placeholder="Last Name" />
+                <span asp-validation-for="Input.LastName" style="color:goldenrod"></span>
+                <label asp-for="Input.LastName" class="form-label"></label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <select class="form-control" asp-for="Input.DrMajor" asp-items="Model.Majors">
+                </select>
+                <span asp-validation-for="Input.DrMajor" style="color:goldenrod"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number." />
+                <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                <span asp-validation-for="Input.PhoneNumber" style="color:goldenrod"></span>
+            </div>
+            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-warning">Save</button>
+         </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Profile Picture</label>
+                @if(Model.Input.ProfilePicture != null)
+                {
+                  <img id="profilepicture" class="profile-picture" alt="profile" src="data:image/*;base64,@(Convert.ToBase64String(Model.Input.ProfilePicture))" />
+                  
+                }
+                else
+                {
+                    <img id="profilepicture" class="profile-picture" alt="profile" src="/Images/EmptyProfile.png" />
+                }
+
+                <div class="custom-file mt-2">
+                    <input type="file"
+                        accept="image/*"
+                        asp-for="Input.ProfilePicture"
+                        class="custom-file-input"
+                       onchange="document.getElementById('profilepicture').src= window.URL.createObjectURL(this.files[0]) " />
+                        
+                     <label class="custom-file-label" asp-for="Input.ProfilePicture">Change Profile</label>
+                     <span asp-validation-for="Input.ProfilePicture" style="color:goldenrod"></span>
+                </div>
+            </div>
+         </div>
+        
+
+  </div>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

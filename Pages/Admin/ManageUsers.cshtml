@@ -1,0 +1,45 @@
+﻿@page
+@model RatingManagementSystem.Pages.Admin.ManageUsersModel
+@{
+}
+
+
+<h3 style="color:dimgray"> View All User and Manage their Roles</h3>
+<h5><a style="color:darkslategray" asp-page="ChooseCommittees"> Create A Committee</a> </h5>
+
+<table class="table table-striped mt-4">
+    <thead>
+        <tr style="background-color:dimgray;color:white">
+            <th>First Name:</th>
+            <th>Last Name:</th>
+            <th> Email:</th>
+            <th> Roles:</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+
+    <tbody>
+        @foreach (var user in Model.usersManage)
+        {
+            <tr>
+                <td>@user.FirstName</td>
+                <td>@user.LastName</td>
+                <td>@user.Email</td>
+                @if (@user.Roles.Any())
+                {
+                    <td>@string.Join(" , ", @user.Roles.ToList())</td>
+                }
+                <td>
+                    <a class="btn btn-warning" asp-page="ManageUsersRoles" asp-route-id="@user.Id">Roles</a>
+                    <a class="btn btn-outline-warning" asp-page="EditUserDetails" asp-route-id="@user.Id">Edit</a>
+                    <a class="btn btn-outline-warning" asp-page="UserDetails" asp-route-id="@user.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+</table>
+
+

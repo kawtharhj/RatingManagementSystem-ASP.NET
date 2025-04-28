@@ -1,0 +1,18 @@
+﻿@page
+@model RatingManagementSystem.Pages.Employee.DeleteModel
+@{
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this Application?</h3>
+<h2 class="text-danger"> Data will be removed from database</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="appdata.ApplicationID" />
+    <input type="hidden" asp-for="appdata.FolderPath" />
+    <input type="submit" value="Delete" class="btn btn-danger" />
+
+</form>
+<a asp-page="CheckApplication" style="color:darkgoldenrod">Back to List</a>
+

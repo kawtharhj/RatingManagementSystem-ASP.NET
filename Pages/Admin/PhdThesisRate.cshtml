@@ -1,0 +1,123 @@
+﻿@page
+@model RatingManagementSystem.Pages.Admin.PhdThesisRateModel
+@{
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="/css/csstable/style.css">
+
+</head>
+
+
+@if (Model.ApplicationData == null || !Model.ApplicationData.Any())
+{
+    <p>There is no applications yet.</p>
+}
+
+else
+{
+    <hr />
+    <h4 class="text-center" style="color:saddlebrown">PhdThesisRate Applications</h4>
+    <form method="get">
+
+        <select name="filterValue">
+            <option value="">All Application</option>
+            <option value="Biology">Biology</option>
+            <option value="Biochemistry">Biochemistry</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Electronic">Electronic</option>
+            <option value="Informatics">Informatics</option>
+            <option value="Math">Math</option>
+            <option value="Physics">Physics</option>
+            <option value="Statistics">Statistics</option>
+            <option value="Other">Other</option>
+        </select>
+        <input type="submit" value="Filter" class="btn btn-outline-warning" />
+    </form>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-wrap">
+
+                <table class="table table-responsive-xl">
+                    <thead>
+
+                        <tr class="table-dark">
+                            <th style="color:bisque;font-weight:bold;font-size:large">
+                                Name:
+                            </th>
+                            <th style="color:bisque;font-weight:bold;font-size:large">
+                                Major
+                            </th>
+                            <th style="color:bisque;font-weight:bold;font-size:large">
+                                Thesis Title
+                            </th>
+                            <th style="color:bisque;font-weight:bold;font-size:large">
+                                Defense Date:
+                            </th>
+                            <th style="color:bisque;font-weight:bold;font-size:large">
+                                Status
+                            </th>
+
+                            <th></th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+                        @foreach (var user in Model.ApplicationData)
+                        {
+                            <tr>
+                                <td>
+                                    @user.FirstName
+                                </td>
+                                <td>
+                                    @user.DrMajor
+                                </td>
+                                <td>
+                                    @user.ThesisTitle
+                                </td>
+                                <td>
+                                    @user.DefenseDate - @user.DefenseUniversity
+                                </td>
+                                
+                                @if (user.ApplicationStatus == "In-Progress")
+                                {
+                                    <td class="status"><span class="waiting">@user.ApplicationStatus</span></td>
+                                }
+                               
+                                <td>
+                                    <a asp-page="AppDetails" asp-route-id="@user.ApplicationID" class="brick-link">Details</a>
+                                    <form method="post">
+                                        <input type="hidden" name="ApplicationID" value="@user.ApplicationID" />
+                                        <button type="submit" class="btn btn-outline-warning">Approve</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+<p>
+    <a asp-page="/Index" class="brick-link">Back To Home Page</a>
+</p>
+</html>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>

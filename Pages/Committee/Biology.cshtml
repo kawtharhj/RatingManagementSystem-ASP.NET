@@ -1,0 +1,36 @@
+﻿@page
+@model RatingManagementSystem.Pages.Committee.BiologyModel
+@{
+}
+<hr />
+
+<h4 style="color:darkorchid"> Choose Committee Members - Biology Doctors</h4>
+<hr />
+@if (Model.UserInfoComit.Any())
+{
+    <form method="post">
+        <div class="Container">
+            <div class="row book-details">
+                <div class="col-md-8 details">
+                    @foreach (var dr in Model.UserInfoComit)
+                    {
+                        var isMember = Model.Members.Any(a => a.UserID == dr.Id);
+
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label" style="color:#6111A3">@dr.FirstName @dr.LastName</label>
+                            <div class="col-sm-8">
+                                <input type="checkbox" name="UserInfoComit[@Model.UserInfoComit.IndexOf(dr)].isInCommittee" value="true" @(isMember ? "checked" : "") />
+                                <input type="hidden" name="UserInfoComit[@Model.UserInfoComit.IndexOf(dr)].FirstName" value="@dr.FirstName" />
+                                <input type="hidden" name="UserInfoComit[@Model.UserInfoComit.IndexOf(dr)].LastName" value="@dr.LastName" />
+                                <input type="hidden" name="UserInfoComit[@Model.UserInfoComit.IndexOf(dr)].Id" value="@dr.Id" />
+                            </div>
+                        </div>
+                    }
+
+                    <input type="submit" class="btn btn-outline-warning" value="Save" />
+                </div>
+            </div>
+        </div>
+    </form>
+
+}

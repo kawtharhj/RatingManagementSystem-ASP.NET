@@ -1,0 +1,85 @@
+﻿@page
+@model RatingManagementSystem.Pages.Doctor.ThesisJournalModel
+@{
+}
+
+<div class="row">
+    <div class="col-md-6">
+
+       <form method="post" class="large-form" enctype="multipart/form-data">
+            <div asp-validation-summary="All" style="color:goldenrod"></div>
+
+            <div class="form-group">
+                <label>  Decide If the Thesis : </label>
+                @foreach (var d in Model.Decide)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="thesis.DecideIf" value="@d">
+                        <label class="form-check-label">@d</label>
+                    </div>
+                }
+
+                <span asp-validation-for="thesis.DecideIf" style="color:goldenrod"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="thesis.ResearchTitle"> </label>
+                <input type="text" class="form-control" asp-for="thesis.ResearchTitle" />
+                <span asp-validation-for="thesis.ResearchTitle" style="color:goldenrod"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="thesis.Authors"> </label>
+                <input type="text" class="form-control" asp-for="thesis.Authors" placeholder="Ex: author1,author2..." />
+                <span asp-validation-for="thesis.Authors" style="color:goldenrod"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="thesis.Journal"> </label>
+                <input type="text" class="form-control" asp-for="thesis.Journal" />
+                <span asp-validation-for="thesis.Journal" style="color:goldenrod"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="thesis.JournalNumber"> </label>
+                <input type="number" class="form-control" asp-for="thesis.JournalNumber" />
+                <span asp-validation-for="thesis.JournalNumber" style="color:goldenrod"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="thesis.JournalYear"> </label>
+                <input type="date" class="form-control" asp-for="thesis.JournalYear" />
+                <span asp-validation-for="thesis.JournalYear" style="color:goldenrod"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="thesis.FromPage"> </label>
+                <input type="text" class="form-control" asp-for="thesis.FromPage" />
+                <span asp-validation-for="thesis.FromPage" style="color:goldenrod"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="thesis.ToPage"> </label>
+                <input type="text" class="form-control" asp-for="thesis.ToPage" />
+                <span asp-validation-for="thesis.ToPage" style="color:goldenrod"></span>
+            </div>
+
+            <div class="form-group">
+                <label> Explain how each member participate in this published thesis: </label>
+                <textarea asp-for="thesis.MembersContributionTResearch" rows="10" cols="100"></textarea>
+                <span asp-validation-for="thesis.MembersContributionTResearch" style="color:goldenrod"></span>
+            </div>
+
+            <hr />
+            <br />
+
+            <div class="form-group">
+                <label>Add Another Thesis?</label>
+                <button type="submit" name="action" value="saveAndReload" class="btn btn-outline-secondary">Save and Add Another</button>
+                <button type="submit" name="action" value="saveAndGoBack" class="btn btn-outline-warning">Save and Go Back</button>
+            </div>
+
+        </form>
+
+
+    </div>
+</div>

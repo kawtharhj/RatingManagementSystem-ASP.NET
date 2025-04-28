@@ -1,0 +1,80 @@
+﻿@page
+@model RatingManagementSystem.Pages.Employee.DetailsViewModel
+@{
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/book-details.css">
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+
+    @{
+        await Html.RenderPartialAsync("_DetailsView");
+    }
+
+                 <hr />
+
+                    @foreach (var pdfFile in Model.pdfFiles)
+                    {
+                        <dt class="col-sm-4" style="color:saddlebrown">@pdfFile.propertyName: </dt>
+                        <dd class="col-sm-8">
+                            <button class="btn btn-info" id="@($"OpenBtn-{pdfFile.propertyName}")">PreView Pdf</button>
+                            <div class="modal fade" id="@($"myModal-{pdfFile.propertyName}")" data-backdrop="static">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h2>@pdfFile.propertyName View</h2>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="ExternalFiles">
+                                                <iframe src="/@Model.appdata.FolderPath/@pdfFile.filepath" width=100% height="600"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </dd>
+                    }
+                </dl>
+
+                <form method="post">
+                    <input type="hidden" asp-for="appdata.ApplicationID" />
+                    <button type="submit" class="btn btn-outline-warning">Checked</button>
+                </form>
+                <a asp-page="CheckApplication" class="btn btn-secondary">Back to List</a>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    @section Scripts {
+        <script>
+            // Iterate over each item in the pdfFiles list to handle modal opening
+            @foreach (var item in Model.pdfFiles)
+            {
+                <text>
+                    $("#OpenBtn-@item.propertyName").click(function () {
+                        $("#myModal-@item.propertyName").modal('show');
+                    });
+                </text>
+            }
+        </script>
+
+
+
+    }
+</body>
+</html>
+

@@ -1,0 +1,162 @@
+﻿
+@{
+	@model RatingManagementSystem.Pages.Committee.ApplicationDetailsModel
+}
+
+<div class="container">
+
+	<h1 style="color:goldenrod">@Model.appdata.ThesisTitle </h1>
+	<p style="color:saddlebrown">@Model.appdata.ApplicationStatus</p>
+	<hr />
+
+	<div class="row book-details">
+		<div class="col-md-6 details">
+			<dl class="row">
+				<dt class="col-sm-4" style="color:saddlebrown">Doctor:</dt>
+				<dd class="col-sm-8">@Model.appdata.FirstName @Model.appdata.LastName</dd>
+				<dt class="col-sm-4" style="color:saddlebrown">Major:</dt>
+				<dd class="col-sm-8">@Model.appdata.DrMajor</dd>
+				<dt class="col-sm-4" style="color:saddlebrown">Doctor In Faculty of Science?:</dt>
+				<dd class="col-sm-8">@Model.appdata.DrInFds</dd>
+				<dt class="col-sm-4" style="color:saddlebrown">Faculty:</dt>
+				<dd class="col-sm-8">@Model.appdata.YourFaculty</dd>
+				<dt class="col-sm-4" style="color:saddlebrown">Defense Date & Location:</dt>
+				<dd class="col-sm-8">
+					@Model.appdata.DefenseDate &mdash; @Model.appdata.DefenseLocation &mdash; @Model.appdata.DefenseUniversity
+				</dd>
+				<dt class="col-sm-4" style="color:saddlebrown">Email:</dt>
+				<dd class="col-sm-8">@ViewData["Email"]</dd>
+				<dt class="col-sm-4" style="color:saddlebrown">Phone Number:</dt>
+				<dd class="col-sm-8">@ViewData["PhoneNumber"]</dd>
+				<hr />
+				<h2> Thesis Journals</h2>
+				@if (Model.jornal != null)
+				{
+					<ul class="thesis-journals ">
+						<form method="post" id="myform">
+							@{
+								int i = 0;
+							}
+							@foreach (var jor in Model.jornal)
+							{
+								<dl class="row">
+									<dd class="col-sm-4">
+							<li>
+								<h3>@jor.ResearchTitle</h3>
+								<ul>
+									<li>Journal Name: @jor.Journal</li>
+									<li>Journal Number: @jor.JournalNumber</li>
+									<li>Published Year: @jor.JournalYear</li>
+									<li>
+										Authors:
+													@if (jor.Authors != null)
+													{
+														var auth = jor.Authors.Split(",");
+											<ul>
+															@foreach (var value in auth)
+															{
+													<li>@value</li>
+															}
+											</ul>
+													}
+									</li>
+									<li>The Research Is:</li>
+												@if (@jor.DecideIf != null)
+												{
+										<ul>
+														@foreach (var value in @jor.DecideIf.Split(","))
+														{
+												<li>@value</li>
+														}
+										</ul>
+												}
+								</ul>
+								<p>Additional Details: @jor.MembersContributionTResearch</p>
+							</li>
+							</dd>
+						<dt class="col-sm-8">
+							<h5> For Committee Only</h5>
+
+
+							<div asp-validation-summary="All" style="color:goldenrod"></div>
+							<div class="form-group">
+								<label>Choose Your Application Type </label>
+
+								<input type="hidden" asp-for="@jor.Id" name="@string.Concat($"jornal[{i}].Id")" />
+								<input type="hidden" asp-for="@Model.appdata.ApplicationID" name="id" />
+
+								<div class="form-check">
+									<input class="form-check-input" type="radio" value="InsideThesis" asp-for="@jor.Results.Desicion_ThesisOriginal" name="@string.Concat($"jornal[{i}].",Html.NameFor(model => model.jornal.FirstOrDefault().Results.Desicion_ThesisOriginal).ToString())">
+									<label class="form-check-label">InsideThesis</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="radio" value="OutsideThesis" asp-for="@jor.Results.Desicion_ThesisOriginal" name="@string.Concat($"jornal[{i}].",Html.NameFor(model => model.jornal.FirstOrDefault().Results.Desicion_ThesisOriginal).ToString())">
+									<label class="form-check-label">OutsideThesis</label>
+								</div>
+
+								<div class="form-check">
+									<input class="form-check-input" type="radio" value="FromThesisTopics" asp-for="@jor.Results.Desicion_ThesisOriginal" name="@string.Concat($"jornal[{i}].",Html.NameFor(model => model.jornal.FirstOrDefault().Results.Desicion_ThesisOriginal).ToString())">
+									<label class="form-check-label">FromThesisTopics</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value="true" name="@string.Concat($"jornal[{i}].",Html.NameFor(model => model.jornal.FirstOrDefault().Results.Desicion_ParticipationInConference).ToString())">
+									<label class="form-check-label">ParticipationInConference</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value="true" name="@string.Concat($"jornal[{i}].",Html.NameFor(model => model.jornal.FirstOrDefault().Results.Desicion_Authentic).ToString())">
+									<label class="form-check-label">Is Authentic</label>
+								</div>
+
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value="true" name="@string.Concat($"jornal[{i}].",Html.NameFor(model => model.jornal.FirstOrDefault().Results.Desicion_Patented).ToString())">
+									<label class="form-check-label">Patented</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value="true" name="@string.Concat($"jornal[{i}].",Html.NameFor(model => model.jornal.FirstOrDefault().Results.Desicion_PublishedInInternationalMagazine).ToString())">
+									<label class="form-check-label">PubInternationalMagazine</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value="true" name="@string.Concat($"jornal[{i}].",Html.NameFor(model => model.jornal.FirstOrDefault().Results.Desicion_PresentedInInternationalConference).ToString())">
+									<label class="form-check-label">PresInInternationalConf</label>
+								</div>
+							</div>
+
+
+
+						</dt>
+					</dl>
+
+								i++;
+							}
+				<button class="update-btn" onclick="submitForm()" asp-for="@Model.jornal"> Update Result</button>
+				</form>
+				</ul>
+
+				}
+				else
+				{
+				<p>No thesis journals found for this application.</p>
+				}
+			<hr />
+				@foreach (var pdfFile in Model.pdfFiles)
+				{
+				<dt class="col-sm-4" style="color:saddlebrown">@pdfFile.propertyName: </dt>
+				<dd class="col-sm-8">
+					<button class="btn btn-info" id="@($"OpenBtn-{pdfFile.propertyName}")">PreView Pdf</button>
+					<div class="modal fade" id="@($"myModal-{pdfFile.propertyName}")" data-backdrop="static">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h2>@pdfFile.propertyName View</h2>
+								</div>
+								<div class="modal-body">
+									<div class="ExternalFiles">
+										<iframe src="/@Model.appdata.FolderPath/@pdfFile.filepath" width=100% height="600"></iframe>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</dd>
+				}
+			</dl>

@@ -1,0 +1,196 @@
+﻿@page
+@model RatingManagementSystem.Pages.Doctor.DetailsModel
+@{
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/book-details.css">
+</head>
+<body>
+    
+    <div class="container">
+
+        <h1 style="color:goldenrod">@Model.appdata.ThesisTitle </h1>
+        <p style="color:saddlebrown">@Model.appdata.ApplicationStatus</p>
+        <hr />
+        <div class="row book-details">
+            <div class="col-md-8 details">
+                <dl class="row">
+                    <dt class="col-sm-4" style="color:saddlebrown">Doctor:</dt>
+                    <dd class="col-sm-8">@Model.appdata.FirstName @Model.appdata.LastName</dd>
+                    <dt class="col-sm-4" style="color:saddlebrown">Major:</dt>
+                    <dd class="col-sm-8">@Model.appdata.DrMajor</dd>
+                    <dt class="col-sm-4" style="color:saddlebrown">Doctor In Faculty of Science?:</dt>
+                    <dd class="col-sm-8">@Model.appdata.DrInFds</dd>
+                    <dt class="col-sm-4" style="color:saddlebrown">Faculty:</dt>
+                    <dd class="col-sm-8">@Model.appdata.YourFaculty</dd>
+                    <dt class="col-sm-4" style="color:saddlebrown">Defense Date & Location:</dt>
+                    <dd class="col-sm-8">
+                        @Model.appdata.DefenseDate &mdash; @Model.appdata.DefenseLocation &mdash; @Model.appdata.DefenseUniversity
+                    </dd>
+                    <dt class="col-sm-4" style="color:saddlebrown">Email:</dt>
+                    <dd class="col-sm-8">@ViewData["Email"]</dd>
+                    <dt class="col-sm-4" style="color:saddlebrown">Phone Number:</dt>
+                    <dd class="col-sm-8">@ViewData["PhoneNumber"]</dd>
+
+                @*    <hr />
+                    @if (Model.appdata.Accepted != null)
+                    {
+                        <dt class="col-sm-4" style="color:saddlebrown">Final Result : </dt>
+                        <dd class="col-sm-8"> @Model.appdata.Accepted </dd>
+                    }
+                    @if (Model.appdata.FinalResultNotes != null)
+                    {
+                        <dt class="col-sm-4" style="color:saddlebrown"> Additional Notes </dt>
+                        <dd class="col-sm-8"> @Model.appdata.FinalResultNotes</dd>
+
+                        <dt class="col-sm-4" style="color:saddlebrown"> Doctors Participate in Decision </dt>
+
+                        var comt = Model.appdata.DoctorsDecision.Split(",");
+                        <dd class="col-sm-8">
+                        <ul>
+                            @foreach (var value in comt)
+                            {
+                                <li>@value</li>
+                            }
+                        </ul>
+                        </dd>
+
+                    } *@
+                </dl>
+                <hr />
+
+                <h2 class="mb-4">Journal's Details</h2>
+
+                @if (Model.jornaldata != null)
+                {
+                    <ul class="thesis-journals">
+                        @foreach (var jor in Model.jornaldata)
+                        {
+                            <li>
+                                <h3>@jor.ResearchTitle</h3>
+                                <ul>
+                                    <li>Journal Name: @jor.Journal</li>
+                                    <li>Journal Number: @jor.JournalNumber</li>
+                                    <li>Published Year: @jor.JournalYear</li>
+                                    <li>
+                                        Authors:
+                                        @if (jor.Authors != null)
+                                        {
+                                            var auth = jor.Authors.Split(",");
+                                            <ul>
+                                                @foreach (var value in auth)
+                                                {
+                                                    <li>@value</li>
+                                                }
+                                            </ul>
+                                        }
+                                    </li>
+                                    <li>The Research Is:</li>
+                                    @if (@jor.DecideIf != null)
+                                    {
+                                        <ul>
+                                            @foreach (var value in @jor.DecideIf.Split(","))
+                                            {
+                                                <li>@value</li>
+                                            }
+                                        </ul>
+                                    }
+                                </ul>
+                                <p>Additional Details: @jor.MembersContributionTResearch</p>
+                                <p>Comments and Results </p>
+                                <br />
+                                <br />
+                                
+                                @if (jor.Results != null)
+                                {
+                                    <table class="results-table table table-bordered table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Criteria</th>
+                                                <th>Decision</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Thesis Original</td>
+                                                <td>@jor.Results.Desicion_ThesisOriginal</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Is Authentic?</td>
+                                                <td>@jor.Results.Desicion_Authentic</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Patented</td>
+                                                <td>@jor.Results.Desicion_Patented</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Published In International Magazine</td>
+                                                <td>@jor.Results.Desicion_PublishedInInternationalMagazine</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Participation In Conference</td>
+                                                <td>@jor.Results.Desicion_ParticipationInConference</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Presented In International Conference</td>
+                                                <td>@jor.Results.Desicion_PresentedInInternationalConference</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <hr />
+                                }
+                                else
+                                {
+                                    <p>No results found for this journal.</p>
+                                }
+                            </li>
+                        }
+                       
+                    </ul>
+                }
+                else
+                {
+                    <p>No thesis journals found for this application.</p>
+                }
+                <a asp-page="Edit" asp-route-id="@Model.appdata.ApplicationID" class="btn btn-warning">Edit</a>
+
+               @*  @if (Model.appdata.FinalResultNotes)
+                {
+                    
+                }  *@
+                
+                <div class="container mt-5">
+                    <div class="row justify-content-center">
+                        <div class="col-md-4">
+                            <!-- Simple Result Box -->
+                            <div class="border p-4 text-center bg-light rounded">
+                                <h3 class="mb-3 fs-5">Application Acceptance</h3>
+                                <p class="fs-1 fw-bold @(Model.appdata.Accepted == "Yes" ? "text-success" : "text-danger")">
+                                    @Model.appdata.Accepted
+                                </p>
+                                <p class="text-muted">@Model.appdata.FinalResultNotes</p>
+                                <small class="text-muted">Doctors participate in the desicion:@Model.appdata.DoctorsDecision</small>
+                            </div>
+                            <!-- End of Result Box -->
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <a asp-page="ThesisJournal" asp-route-AppID="@Model.appdata.ApplicationID" class="btn btn-outline-warning">Add New Journal</a>
+                <a asp-page="MyApplications" class="btn btn-secondary">Back to List</a>
+
+
+
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</html>

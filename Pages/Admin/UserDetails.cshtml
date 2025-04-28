@@ -1,0 +1,38 @@
+﻿@page
+@model RatingManagementSystem.Pages.Admin.UserDetailsModel
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/book-details.css">
+</head>
+<body>
+    <div class="container">
+        <hr />
+        <div class="row book-details">
+            <div class="col-md-8 details">
+                <dl class="row">
+                    <dt class="col-sm-4">Doctor:</dt>
+                    <dd class="col-sm-8">@ViewData["FirstName"] @ViewData["LastName"]</dd>
+                    <dt class="col-sm-4">Email:</dt>
+                    <dd class="col-sm-8">@ViewData["Email"]</dd>
+                    <dt class="col-sm-4">Address:</dt>
+                    <dd class="col-sm-8">@ViewData["Address"]</dd>
+                    <dt class="col-sm-4">Phone Number:</dt>
+                    <dd class="col-sm-8">@ViewData["PhoneNumber"]</dd>
+                </dl>
+
+                <a asp-page="ManageUsers" class="btn btn-secondary">Back to List</a>
+
+
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

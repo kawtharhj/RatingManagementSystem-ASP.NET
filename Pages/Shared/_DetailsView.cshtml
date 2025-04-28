@@ -1,0 +1,81 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<div class="container">
+
+    <h1 style="color:goldenrod">@Model.appdata.ThesisTitle </h1>
+    <p style="color:saddlebrown">@Model.appdata.ApplicationStatus</p>
+    <hr />
+
+    <div class="row book-details">
+        <div class="col-md-8 details">
+            <dl class="row">
+                <dt class="col-sm-4" style="color:saddlebrown">Doctor:</dt>
+                <dd class="col-sm-8">@Model.appdata.FirstName @Model.appdata.LastName</dd>
+                <dt class="col-sm-4" style="color:saddlebrown">Major:</dt>
+                <dd class="col-sm-8">@Model.appdata.DrMajor</dd>
+                <dt class="col-sm-4" style="color:saddlebrown">Doctor In Faculty of Science?:</dt>
+                <dd class="col-sm-8">@Model.appdata.DrInFds</dd>
+                <dt class="col-sm-4" style="color:saddlebrown">Faculty:</dt>
+                <dd class="col-sm-8">@Model.appdata.YourFaculty</dd>
+                <dt class="col-sm-4" style="color:saddlebrown">Defense Date & Location:</dt>
+                <dd class="col-sm-8">
+                    @Model.appdata.DefenseDate &mdash; @Model.appdata.DefenseLocation &mdash; @Model.appdata.DefenseUniversity
+                </dd>
+                <dt class="col-sm-4" style="color:saddlebrown">Email:</dt>
+                <dd class="col-sm-8">@ViewData["Email"]</dd>
+                <dt class="col-sm-4" style="color:saddlebrown">Phone Number:</dt>
+                <dd class="col-sm-8">@ViewData["PhoneNumber"]</dd>
+
+                <hr />
+
+                <h2>Journal's Details</h2>
+                @if (Model.jornal != null)
+                {
+                    <ul class="thesis-journals">
+                        @foreach (var jor in Model.jornal)
+                        {
+                            <li>
+                                <h3>@jor.ResearchTitle</h3>
+                                <ul>
+                                    <li>Journal Name: @jor.Journal</li>
+                                    <li>Journal Number: @jor.JournalNumber</li>
+                                    <li>Published Year: @jor.JournalYear</li>
+                                    <li>
+                                        Authors:
+                                        @if (jor.Authors != null)
+                                        {
+                                            var auth = jor.Authors.Split(",");
+                                            <ul>
+                                                @foreach (var value in auth)
+                                                {
+                                                    <li>@value</li>
+                                                }
+                                            </ul>
+                                        }
+                                    </li>
+                                    <li>The Research Is:</li>
+                                    @if (@jor.DecideIf != null)
+                                    {
+                                        <ul>
+                                            @foreach (var value in @jor.DecideIf.Split(","))
+                                            {
+                                                <li>@value</li>
+                                            }
+                                        </ul>
+                                    }
+                                </ul>
+                                <p>Additional Details: @jor.MembersContributionTResearch</p>
+                            </li>
+                        }
+
+                    </ul>
+                }
+                else
+                {
+                    <p>No thesis journals found for this application.</p>
+                }

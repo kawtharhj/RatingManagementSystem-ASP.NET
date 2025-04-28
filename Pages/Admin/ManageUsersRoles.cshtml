@@ -1,0 +1,37 @@
+﻿@page
+@model RatingManagementSystem.Pages.Admin.ManageUsersRolesModel
+@{
+}
+
+
+<h1>Manage User Roles</h1>
+
+<form method="post">
+    <div class="card mt-4">
+        <div class="card-header">
+            <h2>For Dr @Model.userData.Email</h2>
+            Add/Remove Roles
+        </div>
+
+        <div class="card-body">
+            <input type="hidden" asp-for="userData.Id" />
+            @for (int i = 0; i < Model.userData.Roles.Count; i++)
+            {
+                <div class="form-check mt1">
+                    <input type="hidden" asp-for="userData.Roles[i].RoleName" />
+                    <input asp-for="@Model.userData.Roles[i].isSelected" class="form-check-input" />
+                    <label class="form-check-label" asp-for="@Model.userData.Roles[i].isSelected">
+                        @Model.userData.Roles[i].RoleName
+                    </label>
+                </div>
+
+            }
+            <div class="card-footer">
+                <input type="submit" value="Add" class="btn btn-warning" />
+                <a asp-page="ManageUsers" class="btn btn-secondary">Cancel</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+

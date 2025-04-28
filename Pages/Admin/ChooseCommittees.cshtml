@@ -1,0 +1,153 @@
+﻿@page
+@model RatingManagementSystem.Pages.Admin.ChooseCommitteesModel
+@{
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title >Create A Committee: </title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jura:wght@500;600;900&display=swap">
+
+    <style>
+      
+        *,
+        *::before,
+        *::after {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        body {
+          --color: rgba(30, 30, 30);
+          --bgColor: rgba(245, 245, 245);
+          min-height: 100vh;
+          display: grid;
+          align-content: center;
+          gap: 2rem;
+          padding: 2rem;
+          font-family: "Jura", sans-serif;
+          color: var(--color);
+          background: var(--bgColor);
+        }
+
+        h1 {
+          text-align: center;
+        }
+
+        ul {
+          width: min(60rem, 90%);
+          margin-inline: auto;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+          justify-content: center;
+          gap: 2rem;
+          list-style: none;
+        }
+
+        ul li {
+          max-width: 12rem;
+          justify-self: center;
+          display: grid;
+          grid-template:
+            "icon"
+            "line"
+            "dot"
+            "title"
+            "descr" 1fr;
+          justify-items: center;
+          align-items: flex-start;
+          text-align: center;
+        }
+
+        ul li .icon {
+          grid-area: icon;
+          width: 6rem;
+          aspect-ratio: 1;
+          display: grid;
+          place-items: center;
+          color: white;
+          font-size: 2.5rem;
+          border: 0.4rem solid var(--bgColor);
+          border-radius: 50%;
+          background: var(--accent-color);
+          box-shadow: -0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.45),
+            inset -0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.45);
+        }
+
+        ul li::before {
+          content: "";
+          grid-area: line;
+          height: 2rem;
+          border-right: 2px dotted currentColor;
+        }
+
+        ul li::after {
+          content: "";
+          grid-area: dot;
+          width: 1rem;
+          aspect-ratio: 1;
+          border-radius: 50%;
+          background: var(--accent-color);
+          justify-self: center;
+          margin-bottom: 0.5rem;
+        }
+
+        ul li .title {
+          grid-area: title;
+          margin-block: 0.5rem;
+          font-size: 1.3rem;
+          font-weight: 600;
+          text-align: center;
+          text-transform: uppercase;
+        }
+
+        .credits {
+          position: fixed;
+          bottom: 1rem;
+          right: 1rem;
+        }
+  
+    </style>
+
+</head>
+<body>
+    <!-- partial:index.partial.html -->
+    <h1 style="color:darkgoldenrod">Create A Committee</h1>
+    <hr />
+
+    <ul>
+        <li style="--accent-color:#60c5a6">
+            <div class="icon"><i class="fa-solid fa-calculator"></i></div>
+            <div class="title"> <a asp-page="/Committee/Math" style="color:#60c5a6">Math</a></div>
+            <div class="descr">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, impedit?</div>
+        </li>
+        <li style="--accent-color:#f20071">
+            <div class="icon"><i class="fa-solid fa-transformer-bolt"></i></div>
+            <div class="title"> <a asp-page="/Committee/Physics" style="color:#f20071">Physics </a> - <a asp-page="/Committee/Electronic" style="color:#f20071">Electronic</a> </div>
+            <div class="descr">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+        </li>
+        <li style="--accent-color:#FCBA35">
+            <div class="icon"><i class="fa-regular fa-chart-column"></i></div>
+            <div class="title"> <a asp-page="/Committee/Statistics" style="color:#FCBA35">Statistics</a>- <a asp-page="/Committee/Info" style="color:#FCBA35">Informatics</a></div>
+            <div class="descr">Lorem ipsum dolor sit.</div>
+        </li>
+        <li style="--accent-color:#DAE438">
+            <div class="icon"><i class="fa-regular fa-flask-vial"></i></div>
+            <div class="title"><a asp-page="/Committee/Chemistry" style="color:#DAE438">Chemistry</a>  - <a asp-page="/Committee/BioChemistry" style="color:#DAE438">BioChemistry</a></div>
+            <div class="descr">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor laboriosam odio alias.</div>
+        </li>
+        <li style="--accent-color:#994D7F">
+            <div class="icon"><i class="fa-regular fa-dna"></i></div>
+            <div class="title"><a asp-page="/Committee/Biology" style="color:#994D7F">Biology</a> - <a asp-page="/Committee/Geology" style="color:#994D7F">Geology</a></div>
+            <div class="descr">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+        </li>
+    </ul>
+
+    <!-- partial -->
+
+</body>
+</html>

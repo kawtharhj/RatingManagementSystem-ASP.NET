@@ -1,0 +1,63 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="wrapper">
+    <div class="logo">
+        <img src="/Images/lebaneseUniLogo.png" alt="">
+    </div>
+ 
+    <form class="p-3 mt-3" id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <div asp-validation-summary="ModelOnly" style="color:goldenrod" role="alert"></div>
+
+        <div class="form-field d-flex align-items-center">
+            <span class="far fa-user"></span>
+            <input type="text" asp-for="Input.FirstName" class="form-control" id="userName" placeholder="First Name" />
+            <span asp-validation-for="Input.FirstName" style="color:goldenrod"></span>
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <span class="far fa-user"></span>
+            <input type="text" asp-for="Input.LastName" class="form-control" id="userName" placeholder="Last Name" />
+            <span asp-validation-for="Input.LastName" style="color:goldenrod"></span>
+        </div>
+
+        <div  class="form-field d-flex align-items-center">
+           @*  <label asp-for="Input.DrMajor"> </label> *@
+            <select class="form-control" asp-for="Input.DrMajor" asp-items="Model.Majors">
+            </select>
+            <span asp-validation-for="Input.DrMajor" style="color:goldenrod"></span>
+        </div>
+
+        <div class="form-field d-flex align-items-center">
+            <span class="far fa-user"></span>
+            <input type="email" asp-for="Input.Email" class="form-control" id="userName" placeholder="example@ul.edu.lb" />
+            <span asp-validation-for="Input.Email" style="color:goldenrod"></span>
+        </div>
+
+        <div class="form-field d-flex align-items-center">
+            <span class="fas fa-key"></span>
+            <input asp-for="Input.Password" autocomplete="new-password" aria-required="true" placeholder="Password">
+            <span asp-validation-for="Input.Password" style="color:goldenrod"></span>
+        </div>
+
+        <div class="form-field d-flex align-items-center">
+            <span class="fas fa-key"></span>
+            <input asp-for="Input.ConfirmPassword" autocomplete="new-password" aria-required="true" placeholder="ConfirmPassword">
+            <span asp-validation-for="Input.ConfirmPassword" style="color:goldenrod"></span>
+        </div>
+
+        <button id="registerSubmit" type="submit" class="btn mt-3">Register</button>
+    </form>
+    <div class="text-center fs-6">
+        <a href="#">Forget password?</a> or <a href="#">Sign up</a>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

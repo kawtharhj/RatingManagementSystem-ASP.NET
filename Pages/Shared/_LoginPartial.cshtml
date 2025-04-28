@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using RatingManagementSystem.Data.Models
+
+@inject SignInManager<UserData> SignInManager
+@inject UserManager<UserData> UserManager
+
+<ul class="navbar-nav">
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+       @*  @if (UserManager.GetUserAsync(User).Result.ProfilePicture != null)
+        {
+            <li class="nav-item">
+                <img class="rounded-circle" alt="Profile" src="data:image/*;base64,@(Convert.ToBase64String(UserManager.GetUserAsync(User).Result.ProfilePicture))" style="height:40px;width:40px;object-fit:cover" />
+            </li>
+
+        } *@
+        <li class="nav-item dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                @User.Identity?.Name
+            </a>
+
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Profile</a></li>
+                <li> <hr class="dropdown-divider" /> </li>
+                <li><a class="dropdown-item" asp-page="/Doctor/PhdApplication">Send Application</a></li>
+               
+                @{
+
+                    var user = await UserManager.GetUserAsync(User);
+                    var major = user.DoctorMajor;
+
+                    @if (User.IsInRole("Admin") || User.HasClaim(cl => cl.Value == major))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link mx-2" asp-page="/Committee/Apps/@(user?.DoctorMajor)Apps">
+                                Review Committee
+                            </a>
+                        </li>
+                    }
+                }
+                
+                <li>
+                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Login", new { area = "" })">
+                        <button type="submit" class="nav-link btn btn-link text-dark"> Logout</button>
+                    </form>
+            </ul>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+</ul>

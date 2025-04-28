@@ -1,0 +1,140 @@
+﻿@page
+@model RatingManagementSystem.Pages.Doctor.EditModel
+@{
+}
+
+
+<form method="post" class="large-form" enctype="multipart/form-data">
+    @* <div asp-validation-summary="All" style="color:goldenrod"></div> *@
+
+
+    <div class="form-group">
+        <label asp-for="appl.FirstName"> </label>
+        <input class="form-control" asp-for="appl.FirstName" />
+        <span asp-validation-for="appl.FirstName" style="color:goldenrod"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="appl.LastName"> </label>
+        <input class="form-control" asp-for="appl.LastName" />
+        <span asp-validation-for="appl.LastName" style="color:goldenrod"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="appl.DrMajor"> </label>
+        <select class="form-control" asp-for="appl.DrMajor" asp-items="Model.Majors">
+        </select>
+    </div>
+    <br />
+
+    <div class="form-group">
+        <label>Are You a Doctor In Faculity of Science? </label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" value="Yes" asp-for="appl.DrInFds" checked>
+            <label class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" value="No" asp-for="appl.DrInFds">
+            <label class="form-check-label">No</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label> <h4>If No, Specify : </h4></label>
+        <input type="text" asp-for="appl.YourFaculty" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="appl.ThesisTitle"> </label>
+        <input type="text" class="form-control" asp-for="appl.ThesisTitle" />
+        <span asp-validation-for="appl.ThesisTitle" style="color:goldenrod"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="appl.DefenseDate"> </label>
+        <input class="form-control" asp-for="appl.DefenseDate" />
+        <span asp-validation-for="appl.DefenseDate" style="color:goldenrod"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="appl.DefenseLocation"> </label>
+        <input type="text" class="form-control" asp-for="appl.DefenseLocation" />
+        <span asp-validation-for="appl.DefenseLocation" style="color:goldenrod"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="appl.DefenseUniversity"> </label>
+        <input type="text" class="form-control" asp-for="appl.DefenseUniversity" />
+        <span asp-validation-for="appl.DefenseUniversity" style="color:goldenrod"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="appl.PhDThesisFilePath"> </label>
+        <input type="file" class="form-control" asp-for="appl.PhDThesisFilePath" />
+        <span asp-validation-for="appl.PhDThesisFilePath" style="color:goldenrod"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="appl.MasterThesisFilePath"> </label>
+        <input type="file" class="form-control" asp-for="appl.MasterThesisFilePath" />
+        <span asp-validation-for="appl.MasterThesisFilePath" style="color:goldenrod"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="appl.CVFilePath"> </label>
+        <input type="file" class="form-control" asp-for="appl.CVFilePath" />
+        <span asp-validation-for="appl.CVFilePath" style="color:goldenrod"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="appl.PublicationsFilePath"> </label>
+        <input type="file" class="form-control" asp-for="appl.PublicationsFilePath" />
+        <span asp-validation-for="appl.PublicationsFilePath" style="color:goldenrod"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="appl.ConferenceParticipationFilePath"> </label>
+        <input type="file" class="form-control" asp-for="appl.ConferenceParticipationFilePath" />
+        <span asp-validation-for="appl.ConferenceParticipationFilePath" style="color:goldenrod"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="appl.PhDEquivalencyFilePath"> </label>
+        <input type="file" class="form-control" asp-for="appl.PhDEquivalencyFilePath" />
+        <span asp-validation-for="appl.PhDEquivalencyFilePath" style="color:goldenrod"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="appl.RapportdeSoutenanceFilePath"> </label>
+        <input type="file" class="form-control" asp-for="appl.RapportdeSoutenanceFilePath" />
+        <span asp-validation-for="appl.RapportdeSoutenanceFilePath" style="color:goldenrod"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="appl.BacCertificateFilePath"> </label>
+        <input type="file" class="form-control" asp-for="appl.BacCertificateFilePath" />
+        <span asp-validation-for="appl.BacCertificateFilePath" style="color:goldenrod"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="appl.MasterCertificateFilePath"> </label>
+        <input type="file" class="form-control" asp-for="appl.MasterCertificateFilePath" />
+        <span asp-validation-for="appl.MasterCertificateFilePath" style="color:goldenrod"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="appl.PhDCertificateFilePath"> </label>
+        <input type="file" class="form-control" asp-for="appl.PhDCertificateFilePath" />
+        <span asp-validation-for="appl.PhDCertificateFilePath" style="color:goldenrod"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="appl.OtherFilePath"> </label>
+        <input type="file" class="form-control" asp-for="appl.OtherFilePath" />
+        <span asp-validation-for="appl.OtherFilePath" style="color:goldenrod"></span>
+    </div>
+
+    <input type="submit" value="Update" class="btn btn-warning" />
+
+</form>
